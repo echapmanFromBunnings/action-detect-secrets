@@ -47,6 +47,11 @@ Optional. Additional reviewdog flags.
 Optional. Flags and args of detect-secrets command.
 The default is `--all-files --force-use-all-plugins`.
 
+### `json_filename`
+
+Optional. writes findings to file named as per arg.
+The default is null.
+
 ## Example usage
 
 ### [.github/workflows/reviewdog.yml](.github/workflows/reviewdog.yml)
