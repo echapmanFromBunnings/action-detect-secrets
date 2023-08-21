@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import json
+import argparse
 
 rdjson = {
     'source': {
@@ -12,8 +13,11 @@ rdjson = {
     'diagnostics': []
 }
 
-
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-json_filename', dest='json_filename', type=str, help='file name of local file containing findings')
+    args = parser.parse_args()
+
     baseline = json.load(sys.stdin)
     if not baseline['results']:
         baseline['results'] = {}
@@ -42,6 +46,9 @@ def main():
 
     try:
         sys.stdout.write(json.dumps(rdjson, indent=2, ensure_ascii=False))
+        if(len(rdjson['diagnostics']) > 0 ):
+            with open(args.json_filename, "w") as json_file:
+                json.dump(rdjson, json_file, indent=4, ensure_ascii=False)
         sys.stdout.write('\n')
     except Exception as error:
         sys.stderr.write('Error: %s\n' % error)
