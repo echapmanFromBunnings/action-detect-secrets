@@ -9,7 +9,7 @@ detect-secrets --version
 git config --global --add safe.directory /github/workspace
 
 detect-secrets scan ${INPUT_DETECT_SECRETS_FLAGS} ${INPUT_WORKDIR} \
-    | baseline2rdf \
+    | baseline2rdf -json_filename="${INPUT_JSON_FILENAME}" \
     | reviewdog -f=rdjson \
         -name="${INPUT_NAME:-detect-secrets}" \
         -filter-mode="${INPUT_FILTER_MODE:-added}" \
